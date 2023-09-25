@@ -30,6 +30,13 @@ public class AreaImplementor {
 		circle.CalculateArea();
 		square.CalculateArea();
 		rectangale.CalculateArea();
+		
+		// Using interface as a proxy object 
+		// This is useful and acts like as if classes are subscribed to the Area interface
+		// Allows the area interface to broadcast a message to classes.
+		
+		Area a1 = new Circle(10);
+		a1.CalculateArea();
 
 	}
 
