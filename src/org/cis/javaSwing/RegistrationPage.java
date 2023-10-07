@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.cis.week2;
+package org.cis.javaSwing;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,8 +19,10 @@ import javax.swing.JTextField;
  */
 public class RegistrationPage extends JFrame implements ActionListener{
 	
+	// Creates an object of FetchData Class and initializes the database connection.
 	
-
+	FetchData sql = new FetchData();
+	
 	/**
 	 * 
 	 */
@@ -159,12 +161,19 @@ public class RegistrationPage extends JFrame implements ActionListener{
 	            JOptionPane.showMessageDialog(frame, "Please fill in all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
 	            return;
 	        }
-
-	        // TODO: Add your user registration logic here (e.g., save to database)
-
-	        JOptionPane.showMessageDialog(frame, "Registration successfully done!", "Success", JOptionPane.INFORMATION_MESSAGE);
-	        new LoginPage();
-	        dispose();
+	        else {	 
+	        	// TODO: Add your user registration logic here (e.g., save to database)
+	        	// Adds user to the registration table
+	        	sql.registerUsers(name, address, number, username, password);
+	        	
+	        	// Adds the same necessary values to the login table
+	        	
+	        	sql.addLoginDetails(username, password);
+	        	
+	        	JOptionPane.showMessageDialog(frame, "Registration successfully done!", "Success", JOptionPane.INFORMATION_MESSAGE);
+		        new LoginPage();
+		        dispose();
+	        }    
 	    }
 		
 		private void ClearTexts() {

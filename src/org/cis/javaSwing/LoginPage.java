@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.cis.week2;
+package org.cis.javaSwing;
 
 
 
@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -24,6 +25,10 @@ import javax.swing.event.ChangeListener;
  * 
  */
 public class LoginPage extends JFrame implements ActionListener, ChangeListener{
+	
+	// Initialize Database Connection with the object of FetchData.
+	
+	FetchData sql = new FetchData();
 
 	/**
 	 * 
@@ -135,11 +140,22 @@ public class LoginPage extends JFrame implements ActionListener, ChangeListener{
         	
             JOptionPane.showMessageDialog(frame, "Please fill in all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
-        }
+        } else
+			try {
+				if(sql.validateUser(username, password) == true) {
+					JOptionPane.showMessageDialog(frame, "Login successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+					new UserHomePage();
+					dispose();
+				}
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(frame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
         // TODO: Add your user registration logic here (e.g., save to database)
 
-        JOptionPane.showMessageDialog(frame, "Login successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        
         // System.out.println(password);
     }
 	

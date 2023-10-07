@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.cis.week2;
+package org.cis.javaSwing;
 
 
 import java.sql.Connection;

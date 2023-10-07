@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.cis.week2;
+package org.cis.javaSwing;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,7 +14,7 @@ public class ConnectionTester {
 	static DatabaseConnection dbcon;
 
 	/**
-	 * @param args
+	 * @paramargs
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
