@@ -109,6 +109,7 @@ public class FetchData {
 	
 	public ArrayList<User> getUserData(String username, String password) throws SQLException {
 		List<User> usr = new ArrayList<User>();
+		User user = new User();
 		String sql = "SELECT * FROM registration WHERE user_name = ? AND pass = ?";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		ResultSet rs;
@@ -120,13 +121,44 @@ public class FetchData {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				User user = new User();
+				
 				//return new User(rs.getInt("id"), rs.getString("name"), rs.getString("email"));
 				user.setId(rs.getInt("reg_id"));
 				user.setName(rs.getString("full_name"));
 				user.setAddress(rs.getString("address"));
 				user.setPhoneNumber(rs.getString("phone_number"));
 				user.setUserName(rs.getString("user_name"));
+				usr.add(user);
+				return (ArrayList<User>) usr;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// Handle error
+		}
+		return null;
+		
+	}
+	public ArrayList<User> getDatafromUsername(String username) throws SQLException {
+		List<User> usr = new ArrayList<User>();
+		User user = new User();
+		String sql = "SELECT * FROM registration WHERE user_name = ?";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		ResultSet rs;
+
+		try {
+
+			pstmt.setString(1, username);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				
+				//return new User(rs.getInt("id"), rs.getString("name"), rs.getString("email"));
+				user.setId(rs.getInt("reg_id"));
+				user.setName(rs.getString("full_name"));
+				user.setAddress(rs.getString("address"));
+				user.setPhoneNumber(rs.getString("phone_number"));
+				user.setUserName(rs.getString("user_name"));
+				user.setPassword(rs.getString("pass"));
 				usr.add(user);
 				return (ArrayList<User>) usr;
 			}
