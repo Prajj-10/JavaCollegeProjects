@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -30,6 +32,8 @@ public class LoginPage extends JFrame implements ActionListener, ChangeListener{
 	
 	FetchData sql = new FetchData();
 
+	List<User> userDetails = new ArrayList<User>();
+	
 	/**
 	 * 
 	 */
@@ -144,8 +148,9 @@ public class LoginPage extends JFrame implements ActionListener, ChangeListener{
 			try {
 				if(sql.validateUser(username, password) == true) {
 					JOptionPane.showMessageDialog(frame, "Login successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-					new UserHomePage();
+					new UserHomePage(username, password);
 					dispose();
+					// userDetails = sql.getUserData(username, password);
 				}
 			} catch (SQLException e) {
 				JOptionPane.showMessageDialog(frame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
